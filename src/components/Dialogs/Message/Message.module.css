@@ -1,0 +1,13 @@
+.dialog {
+  margin-bottom: 10px;
+}
+
+.dialogItem {
+  background-color: #9bd1e8;
+  border-radius: 30%;
+  padding: 15px;
+  display: inline-block;
+}
+/*.dialog {*/
+/*  background-color: aqua;*/
+/*}*/

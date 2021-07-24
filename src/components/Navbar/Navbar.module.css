@@ -1,0 +1,22 @@
+.nav {
+    grid-area: n;
+    background-color: rgb(130, 207, 130);
+    padding: 20px;
+}
+
+.item a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.item a.activeLink {
+    color: gold;
+}
+
+.friendsName {
+    display: inline-block;
+    margin: 10px 0;
+    font-size: 26px;
+    color: #f6efe2;
+}
+
