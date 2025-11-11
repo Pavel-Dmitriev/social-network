@@ -1,6 +1,6 @@
 {
   "name": "react-way-of-samurai",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "homepage": "https://github.com/Pavel-Dmitriev/social-network",
   "dependencies": {
@@ -12,19 +12,15 @@
     "react-redux": "^7.2.2",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "5.0.1",
     "redux": "^4.0.5",
     "redux-form": "^8.3.7",
     "redux-thunk": "^2.3.0",
     "reselect": "^4.0.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
   },
   "eslintConfig": {
     "extends": "react-app"
@@ -36,7 +32,9 @@
     "not op_mini all"
   ],
   "devDependencies": {
+    "@vitejs/plugin-react": "^5.1.0",
     "gh-pages": "^3.2.3",
-    "react-test-renderer": "^16.14.0"
+    "react-test-renderer": "^16.14.0",
+    "vite": "^7.2.2"
   }
 }
