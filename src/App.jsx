@@ -46,23 +46,31 @@ class App extends React.Component {
       return <Preloader />;
     }
     return (
-      <div className="app-wrapper">
-        <HeaderContainer />
-        <Navbar />
-        <div className="app-wrapper-content">
-          <Switch>
-            <Route exact path="/" render={() => <Redirect to={"/profile"} />} />
-            <Route
-              path="/profile/:userId?"
-              render={withSuspense(ProfileContainer)}
-            />
-            <Route path="/dialogs" render={withSuspense(DialogsContainer)} />
-            <Route path="/users" render={() => <UsersContainer />} />
-            <Route path="/login" render={() => <Login />} />
-            <Route path="*" render={() => <div>404 NOT FOUND</div>} />
-          </Switch>
+      <>
+        <div className="app-wrapper">
+          <HeaderContainer />
+          <Navbar />
+          <div className="app-wrapper-content">
+            <Switch>
+              <Route
+                exact
+                path="/"
+                render={() => <Redirect to={"/profile"} />}
+              />
+              <Route
+                path="/profile/:userId?"
+                render={withSuspense(ProfileContainer)}
+              />
+              <Route path="/dialogs" render={withSuspense(DialogsContainer)} />
+              <Route path="/users" render={() => <UsersContainer />} />
+              <Route path="/login" render={() => <Login />} />
+              <Route path="*" render={() => <div>404 NOT FOUND</div>} />
+            </Switch>
+          </div>
         </div>
-      </div>
+        {/* футер нужен только для продолжения темного фона от backdrop */}
+        <footer className="bg-backdrop h-full"></footer>
+      </>
     );
   }
 }
