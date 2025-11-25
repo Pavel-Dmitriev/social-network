@@ -1,22 +1,19 @@
-import React from "react";
-import s from "./Header.module.css";
 import { NavLink } from "react-router-dom";
 
 const Header = (props) => {
   return (
-    <header className={s.header}>
-      {/* <img src='https://www.freelogodesign.org/Content/img/logo-ex-7.png' /> */}
-      <img
-        src="https://www.flaticon.com/svg/static/icons/svg/126/126338.svg"
-        alt="social-network"
-      />
-      <div className={s.loginBlock}>
+    <header
+      style={{ gridArea: "h" }}
+      className="rounded-full backdrop-blur-[20px] z-20 p-2 min-h-16.5 h-16.5 flex items-center justify-between bg-white/20"
+    >
+      <span className="text-2xl text-white">БОЛТАЛКА</span>
+      <div className="">
         {props.isAuth ? (
           <div>
             {props.login} - <button onClick={props.logout}>Log out</button>
           </div>
         ) : (
-          <span className="text-red-500">
+          <span className="text-white">
             Вход в систему: <NavLink to={"/login"}>Login</NavLink>
           </span>
         )}

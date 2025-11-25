@@ -2,6 +2,8 @@
 
 @import "../fonts/fonts.css";
 
+@import "./theme.css";
+
 /* Настройки темы */
 @theme {
   --font-sans: "GopherMono", sans-serif;
@@ -16,26 +18,21 @@
 
 html,
 body {
+  height: 100vh;
   margin: 0;
   padding: 0;
-  height: 100%; /* Фиксируем высоту */
-  overflow: hidden; /* Убираем скролл */
+  overflow-y: auto;
+  position: relative;
+}
+
+#root {
+  @apply h-full pt-6;
+}
+
+#backdrop {
+  @apply fixed top-0 left-0 object-cover w-full h-[70%] -z-1 bg-cover;
 }
 
 .app-wrapper {
-  margin: 0 auto;
-  display: grid;
-  width: 1200px;
-  grid-template-areas:
-    "h h"
-    "n c";
-
-  /* grid-template-rows: 60px 1fr; */
-  grid-template-columns: 2fr 10fr;
-  /* grid-gap: 10px; */
-}
-
-.app-wrapper-content {
-  grid-area: c;
-  background-color: #e1ec92;
+  @apply max-w-289.75 mx-auto;
 }
