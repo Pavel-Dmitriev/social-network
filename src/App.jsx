@@ -47,10 +47,10 @@ class App extends React.Component {
     }
     return (
       <>
-        <div className="app-wrapper">
+        <main className="app-wrapper">
           <HeaderContainer />
           <Navbar />
-          <div className="app-wrapper-content">
+          <div>
             <Switch>
               <Route
                 exact
@@ -67,7 +67,7 @@ class App extends React.Component {
               <Route path="*" render={() => <div>404 NOT FOUND</div>} />
             </Switch>
           </div>
-        </div>
+        </main>
         {/* футер нужен только для продолжения темного фона от backdrop */}
         <footer className="bg-backdrop h-full"></footer>
       </>
