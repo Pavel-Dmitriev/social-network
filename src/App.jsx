@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Redirect,
-  Route,
-  Switch,
-  withRouter,
-} from "react-router-dom";
+import { BrowserRouter, Route, Routes, NavLink } from "react-router-dom";
 import Navbar from "./components/Navbar/Navbar";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
@@ -51,21 +45,17 @@ class App extends React.Component {
           <HeaderContainer />
           <Navbar />
           <div>
-            <Switch>
-              <Route
-                exact
-                path="/"
-                render={() => <Redirect to={"/profile"} />}
-              />
+            <Routes>
+              <Route path="/" element={<NavLink to="/profile" replace />} />
               <Route
                 path="/profile/:userId?"
-                render={withSuspense(ProfileContainer)}
+                element={withSuspense(ProfileContainer)}
               />
-              <Route path="/dialogs" render={withSuspense(DialogsContainer)} />
-              <Route path="/users" render={() => <UsersContainer />} />
-              <Route path="/login" render={() => <Login />} />
-              <Route path="*" render={() => <div>404 NOT FOUND</div>} />
-            </Switch>
+              <Route path="/dialogs" element={withSuspense(DialogsContainer)} />
+              <Route path="/users" element={<UsersContainer />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="*" element={<div>404 NOT FOUND</div>} />
+            </Routes>
           </div>
         </main>
         {/* футер нужен только для продолжения темного фона от backdrop */}
@@ -78,10 +68,7 @@ class App extends React.Component {
 const mapStateToProps = (state) => ({
   initialized: state.app.initialized,
 });
-let AppContainer = compose(
-  withRouter,
-  connect(mapStateToProps, { initializeApp })
-)(App);
+let AppContainer = compose(connect(mapStateToProps, { initializeApp }))(App);
 
 const AppWrapper = (props) => {
   return (

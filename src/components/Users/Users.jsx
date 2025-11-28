@@ -1,29 +1,38 @@
-import React from 'react'
-import Paginator from "../common/Paginator/Paginator"
-import User from "./User"
+import React from "react";
+import Paginator from "../common/Paginator/Paginator";
+import User from "./User";
 
-let Users = ({currentPage, totalUsersCount, pageSize, onPageChanged, users, ...props}) => {
+function Users(props) {
+  const {
+    currentPage,
+    totalUsersCount,
+    pageSize,
+    onPageChanged,
+    users,
+    ...rest
+  } = props;
 
   return (
     <div>
-      <Paginator currentPage={currentPage}
-                 onPageChanged={onPageChanged}
-                 totalItemsCount={totalUsersCount}
-                 pageSize={pageSize}
+      <Paginator
+        currentPage={currentPage}
+        onPageChanged={onPageChanged}
+        totalItemsCount={totalUsersCount}
+        pageSize={pageSize}
       />
       <div>
-        {
-          users.map(u => <User user={u}
-                              followingInProgress={props.followingInProgress}
-                              key={u.id}
-                              unfollow={props.unfollow}
-                              follow={props.follow}
+        {users.map((u) => (
+          <User
+            user={u}
+            followingInProgress={rest.followingInProgress}
+            key={u.id}
+            unfollow={rest.unfollow}
+            follow={rest.follow}
           />
-          )
-        }
+        ))}
       </div>
     </div>
-  )
+  );
 }
 
-export default Users
+export default Users;
