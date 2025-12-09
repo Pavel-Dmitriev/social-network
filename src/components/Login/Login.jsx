@@ -4,7 +4,7 @@ import { login } from "../../redux/auth-reducer";
 import style from "./../common/FormsControls.module.css";
 import { createField, Input } from "../common/FormsControls";
 import { required } from "../../utils/validators/validators";
-import { NavLink } from "react-router-dom";
+import { Navigate } from "react-router";
 
 const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
   return (
@@ -47,7 +47,7 @@ const Login = (props) => {
   };
 
   if (props.isAuth) {
-    return <NavLink to={"/profile"} />;
+    return <Navigate to={"/profile"} />;
   }
   return (
     <div>

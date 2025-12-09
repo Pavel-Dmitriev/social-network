@@ -23,6 +23,7 @@ body {
   padding: 0;
   overflow-y: auto;
   position: relative;
+  color: var(--color-white);
 }
 
 #root {
