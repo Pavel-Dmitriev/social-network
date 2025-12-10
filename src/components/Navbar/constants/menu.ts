@@ -1,4 +1,6 @@
-export const MENU = [
+import { IMenuItem } from "../interface";
+
+export const MENU: IMenuItem[] = [
   {
     key: "profile",
     path: "/profile",

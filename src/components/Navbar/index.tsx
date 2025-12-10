@@ -1,9 +1,10 @@
 import { NavLink } from "react-router";
-import { MENU } from "./constants/menu";
-// import Friends from "./Friends/Friends";
+
 // import {friendListCreator} from "../../redux/sidebar-reducer";
 
-const Navbar = (props) => {
+import { MENU } from "./constants/menu";
+
+const Navbar: React.FC = () => {
   return (
     <nav className="flex gap-x-4 items-center">
       {MENU.map((it) => (

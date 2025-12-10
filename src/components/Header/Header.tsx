@@ -1,7 +1,11 @@
+import React from "react";
 import { NavLink } from "react-router";
-import Navbar from "../Navbar/Navbar";
 
-const Header = (props: any) => {
+import Navbar from "../Navbar";
+
+import { IHeaderProps } from "./interface";
+
+const Header: React.FC<IHeaderProps> = (props) => {
   return (
     <header
       style={{ gridArea: "h" }}
@@ -14,7 +18,7 @@ const Header = (props: any) => {
       <div className="">
         {props.isAuth ? (
           <div>
-            {props.login} - <button onClick={props.logout}>Выйти</button>
+            {props.login || ""} - <button onClick={props.logout}>Выйти</button>
           </div>
         ) : (
           <span className="text-white">
