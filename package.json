@@ -7,9 +7,9 @@
     "@tailwindcss/vite": "^4.1.17",
     "axios": "^0.21.1",
     "classnames": "^2.3.1",
-    "react": "^19.2.0",
+    "react": "^19.2.1",
     "react-axios": "^2.0.4",
-    "react-dom": "^19.2.0",
+    "react-dom": "^19.2.1",
     "react-redux": "^7.2.2",
     "react-router": "^7.9.6",
     "redux": "^4.0.5",
@@ -20,7 +20,7 @@
   },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc && vite build",
     "preview": "vite preview"
   },
   "eslintConfig": {
@@ -40,6 +40,7 @@
     "postcss": "^8.5.6",
     "postcss-nested": "^7.0.2",
     "react-test-renderer": "^16.14.0",
+    "typescript": "^5.9.3",
     "vite": "^7.2.2"
   }
 }

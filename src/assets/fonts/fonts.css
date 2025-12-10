@@ -1,8 +1,0 @@
-@font-face {
-  font-style: normal;
-  font-weight: 300 900;
-  src: url("./GopherMono-Regular.woff2") format("woff2"),
-    url("./GopherMono-Regular.woff") format("woff"),
-    url("./GopherMono-Regular.ttf") format("truetype");
-  font-family: "Gopher Mono";
-}

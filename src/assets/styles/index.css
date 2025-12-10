@@ -1,13 +1,12 @@
 @import "tailwindcss";
 
-@import "../fonts/fonts.css";
-
+@import "./fonts.css";
 @import "./theme.css";
 
 /* Настройки темы */
 @theme {
-  --font-sans: "Gopher Mono", sans-serif;
-  --font-serif: "Gopher Mono", sans-serif;
+  --font-sans: "Houschka Pro", sans-serif;
+  --font-serif: "Houschka Pro", sans-serif;
 
   --text-lg--line-height: 1.75rem;
 
@@ -31,7 +30,7 @@ body {
 }
 
 #backdrop {
-  @apply fixed top-0 left-0 object-cover w-full h-[70%] -z-1 bg-cover;
+  @apply fixed top-0 left-0 object-cover w-full h-full -z-1 bg-cover;
 }
 
 .app-wrapper {
