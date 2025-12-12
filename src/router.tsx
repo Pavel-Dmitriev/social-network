@@ -1,38 +1,19 @@
-import { lazy } from "react";
+import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate, useLocation } from "react-router";
 import { Provider } from "react-redux";
 import store from "./redux/redux-store";
 import { withSuspense } from "./hoc/withSuspense";
 import App from "./App";
+import RootErrorBoundary from "./components/RootErrorBoundary";
+import ErrorPage from "./components/ErrorPage";
+import { Preloader } from "./components/common/Preloader/Preloader";
 
-const ProfileContainer = lazy(() =>
-  import("./components/Profile/ProfileContainer")
-);
-const DialogsContainer = lazy(() =>
-  import("./components/Dialogs/DialogsContainer")
+const Profile = lazy(() => import("./components/Profile"));
+const DialogsContainer = lazy(
+  () => import("./components/Dialogs/DialogsContainer")
 );
 const UsersContainer = lazy(() => import("./components/Users/UsersContainer"));
 const Login = lazy(() => import("./components/Login/Login"));
-
-// Error boundaries for Data Mode
-const RootErrorBoundary = ({ error, resetErrorBoundary }) => {
-  return (
-    <div className="error-boundary">
-      <h1>Something went wrong</h1>
-      <p>{error?.message}</p>
-      <button onClick={resetErrorBoundary}>Try again</button>
-    </div>
-  );
-};
-
-const NotFoundErrorBoundary = () => {
-  return (
-    <div className="error-404">
-      <h1>404 - Page Not Found</h1>
-      <p>The page you're looking for doesn't exist.</p>
-    </div>
-  );
-};
 
 // Data loaders for different routes
 const profileLoader = async ({ params, request }) => {
@@ -101,6 +82,7 @@ const dialogsLoader = async ({ params }) => {
 const authLoader = async () => {
   // Check authentication status
   const response = await fetch("/api/auth/me");
+  console.log("🚀 ~ response:", response);
 
   if (response.ok) {
     const userData = await response.json();
@@ -128,90 +110,98 @@ export const router = createBrowserRouter([
     children: [
       {
         path: "/profile/:userId?",
-        element: withSuspense(ProfileContainer),
-        loader: profileLoader,
-        errorElement: (
-          <div>
-            <h2>Failed to load profile</h2>
-            <p>Please try again later</p>
-          </div>
+        element: (
+          <Suspense fallback={<Preloader />}>
+            <Profile />
+          </Suspense>
         ),
+        // loader: profileLoader,
+        // errorElement: (
+        //   <div>
+        //     <h2>Failed to load profile</h2>
+        //     <p>Please try again later</p>
+        //   </div>
+        // ),
       },
-      {
-        path: "/users",
-        element: withSuspense(UsersContainer),
-        loader: usersLoader,
-        errorElement: (
-          <div>
-            <h2>Failed to load users</h2>
-            <p>Please check your connection</p>
-          </div>
-        ),
-      },
-      {
-        path: "/dialogs/:userId?",
-        element: withSuspense(DialogsContainer),
-        loader: dialogsLoader,
-        errorElement: (
-          <div>
-            <h2>Failed to load messages</h2>
-            <p>Please try again</p>
-          </div>
-        ),
-      },
+      // {
+      //   path: "/users",
+      //   element: withSuspense(UsersContainer),
+      //   loader: usersLoader,
+      //   errorElement: (
+      //     <div>
+      //       <h2>Failed to load users</h2>
+      //       <p>Please check your connection</p>
+      //     </div>
+      //   ),
+      // },
+      // {
+      //   path: "/dialogs/:userId?",
+      //   element: withSuspense(DialogsContainer),
+      //   loader: dialogsLoader,
+      //   errorElement: (
+      //     <div>
+      //       <h2>Failed to load messages</h2>
+      //       <p>Please try again</p>
+      //     </div>
+      //   ),
+      // },
       {
         path: "/login",
-        element: withSuspense(Login),
-        loader: authLoader,
-        errorElement: (
-          <div>
-            <h2>Failed to load login page</h2>
-            <p>Authentication service unavailable</p>
-          </div>
-        ),
-      },
-      {
-        path: "/news",
         element: (
-          <div>
-            <h1>News</h1>
-            <p>Coming soon...</p>
-          </div>
+          <Suspense fallback={<Preloader />}>
+            <Login />
+          </Suspense>
         ),
-        loader: async () => {
-          // News loader
-          return { message: "News page" };
-        },
+        // loader: authLoader,
+        // errorElement: (
+        //   <div>
+        //     <h2>Failed to load login page</h2>
+        //     <p>Authentication service unavailable</p>
+        //   </div>
+        // ),
       },
-      {
-        path: "/music",
-        element: (
-          <div>
-            <h1>Music</h1>
-            <p>Coming soon...</p>
-          </div>
-        ),
-        loader: async () => {
-          // Music loader
-          return { message: "Music page" };
-        },
-      },
-      {
-        path: "/settings",
-        element: (
-          <div>
-            <h1>Settings</h1>
-            <p>Coming soon...</p>
-          </div>
-        ),
-        loader: async () => {
-          // Settings loader
-          return { message: "Settings page" };
-        },
-      },
+      // {
+      //   path: "/news",
+      //   element: (
+      //     <div>
+      //       <h1>News</h1>
+      //       <p>Coming soon...</p>
+      //     </div>
+      //   ),
+      //   loader: async () => {
+      //     // News loader
+      //     return { message: "News page" };
+      //   },
+      // },
+      // {
+      //   path: "/music",
+      //   element: (
+      //     <div>
+      //       <h1>Music</h1>
+      //       <p>Coming soon...</p>
+      //     </div>
+      //   ),
+      //   loader: async () => {
+      //     // Music loader
+      //     return { message: "Music page" };
+      //   },
+      // },
+      // {
+      //   path: "/settings",
+      //   element: (
+      //     <div>
+      //       <h1>Settings</h1>
+      //       <p>Coming soon...</p>
+      //     </div>
+      //   ),
+      //   loader: async () => {
+      //     // Settings loader
+      //     return { message: "Settings page" };
+      //   },
+      // },
       {
         path: "*",
-        element: <NotFoundErrorBoundary />,
+        element: <ErrorPage />,
         loader: async () => {
           throw new Response("Not Found", { status: 404 });
         },
@@ -219,14 +209,6 @@ export const router = createBrowserRouter([
     ],
   },
 ]);
-
-// Helper component for Data Mode navigation
-export const useRouteLoaderData = (routeId) => {
-  // Custom hook for accessing loader data
-  // This can be implemented based on your specific needs
-  const { state } = useLocation();
-  return state;
-};
 
 // Router configuration with middleware
 // export const routerWithMiddleware = createBrowserRouter(
