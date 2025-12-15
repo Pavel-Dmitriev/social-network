@@ -1,19 +1,26 @@
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+
 import s from "./ProfileInfo.module.css";
 import { Preloader } from "../../common/Preloader/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/avatar.png";
 import ProfileDataForm from "./ProfileDataForm";
-
-const ProfileInfo = ({
-  profile,
-  status,
+import {
   updateStatus,
-  isOwner,
-  savePhoto,
   saveProfile,
-}) => {
+  savePhoto,
+} from "../../../redux/profile-reducer";
+
+const ProfileInfo = ({ profile, status, isOwner }) => {
   let [editMode, setEditMode] = useState(false);
+
+  const dispatch = useDispatch();
+
+  /** Обработчик обновления статуса */
+  const handleUpdateStatus = (newStatus) => {
+    dispatch(updateStatus(newStatus));
+  };
 
   if (!profile) {
     return <Preloader />;
@@ -21,14 +28,16 @@ const ProfileInfo = ({
 
   const onMainPhotoSelected = (e) => {
     if (e.target.files.length) {
-      savePhoto(e.target.files[0]);
+      dispatch(savePhoto(e.target.files[0]));
     }
   };
 
   const onSubmit = (formData) => {
-    saveProfile(formData).then(() => {
-      setEditMode(false);
-    });
+    dispatch(
+      saveProfile(formData).then(() => {
+        setEditMode(false);
+      })
+    );
   };
 
   return (
@@ -56,7 +65,10 @@ const ProfileInfo = ({
             isOwner={isOwner}
           />
         )}
-        <ProfileStatusWithHooks status={status} updateStatus={updateStatus} />
+        <ProfileStatusWithHooks
+          status={status}
+          updateStatus={handleUpdateStatus}
+        />
         {/*Блок с друзьями*/}
         <div>
           <span>Friends</span>

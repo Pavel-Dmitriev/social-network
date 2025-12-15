@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router";
 
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
-import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import ProfileInfo from "./ProfileInfo";
 
 import { getUserProfile, getStatus } from "../../redux/profile-reducer";
 
@@ -16,7 +16,6 @@ const Profile = () => {
   const profile = useSelector((state) => {
     return state?.profilePage?.profile;
   });
-  console.log("🚀 ~ profile:", profile);
   const status = useSelector((state) => state?.profilePage?.status);
   const authorizedUserId = useSelector((state) => state?.auth?.userId);
   const isAuth = useSelector((state) => state?.auth?.isAuth);
@@ -48,10 +47,7 @@ const Profile = () => {
         {...{
           profile,
           status,
-          updateStatus,
           isOwner,
-          saveProfile,
-          savePhoto,
         }}
       />
       <MyPostsContainer />

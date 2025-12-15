@@ -13,7 +13,7 @@ const DialogsContainer = lazy(
   () => import("./components/Dialogs/DialogsContainer")
 );
 const UsersContainer = lazy(() => import("./components/Users/UsersContainer"));
-const Login = lazy(() => import("./components/Login/Login"));
+const Login = lazy(() => import("./components/Login"));
 
 // Data loaders for different routes
 const profileLoader = async ({ params, request }) => {
