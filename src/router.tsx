@@ -1,8 +1,8 @@
 import { lazy, Suspense } from "react";
 import { createBrowserRouter, Navigate, useLocation } from "react-router";
 import { Provider } from "react-redux";
-import store from "./redux/redux-store";
-import { withSuspense } from "./hoc/withSuspense";
+import store from "store/redux-store";
+// import { withSuspense } from "./hoc/withSuspense";
 import App from "./App";
 import RootErrorBoundary from "./components/RootErrorBoundary";
 import ErrorPage from "./components/ErrorPage";

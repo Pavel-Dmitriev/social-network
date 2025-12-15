@@ -1,12 +1,15 @@
+import { Navigate } from "react-router";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { login } from "../../redux/auth-reducer";
-import style from "./../common/FormsControls.module.css";
-import { createField, Input } from "../common/FormsControls";
-import { required } from "../../utils/validators/validators";
-import { Navigate } from "react-router";
 
-const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
+import { login } from "store/auth-reducer";
+
+import { createField, Input } from "../common/FormsControls";
+
+import style from "./../common/FormsControls.module.css";
+import { required } from "../../utils/validators/validators";
+
+const LoginForm = ({ handleSubmit, error, captchaUrl }: any) => {
   return (
     <form onSubmit={handleSubmit}>
       {createField("Email", "email", [required], Input)}
@@ -34,10 +37,10 @@ const LoginForm = ({ handleSubmit, error, captchaUrl }) => {
   );
 };
 
-const LoginReduxForm = reduxForm({ form: "login" })(LoginForm);
+const LoginReduxForm: any = reduxForm({ form: "login" })(LoginForm);
 
-const Login = (props) => {
-  const onSubmit = (formData) => {
+const Login = (props: any) => {
+  const onSubmit = (formData: any) => {
     props.login(
       formData.email,
       formData.password,
@@ -56,7 +59,7 @@ const Login = (props) => {
     </div>
   );
 };
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: any) => ({
   captchaUrl: state.auth.captchaUrl,
   isAuth: state.auth.isAuth,
 });

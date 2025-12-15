@@ -1,4 +1,4 @@
-import { INITIALIZED_SUCCESS } from "./constants/initialized_success";
+import { INITIALIZED_SUCCESS } from "./constants";
 
 export type initializedSuccessActionType = {
   type: typeof INITIALIZED_SUCCESS;

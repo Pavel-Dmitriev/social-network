@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 
-import HeaderContainer from "./components/Header/HeaderContainer.tsx";
-import { Preloader } from "./components/common/Preloader/Preloader";
+import HeaderContainer from "./components/Header/HeaderContainer";
+// import { Preloader } from "./components/common/Preloader/Preloader";
 import { Outlet } from "react-router";
 
 const App = () => {

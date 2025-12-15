@@ -6,7 +6,7 @@
     "baseUrl": "src",
     "paths": {
       "components/*": ["components/*"],
-      "redux/*": ["redux/*"],
+      "store/*": ["store/*"],
       "assets/*": ["assets/*"]
     },
     "allowJs": false,

@@ -10,7 +10,7 @@ import {
   updateStatus,
   saveProfile,
   savePhoto,
-} from "../../../redux/profile-reducer";
+} from "../../../store/profile-reducer";
 
 const ProfileInfo = ({ profile, status, isOwner }) => {
   let [editMode, setEditMode] = useState(false);

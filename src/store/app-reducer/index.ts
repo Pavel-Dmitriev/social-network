@@ -1,6 +1,6 @@
-import { getAuthUserData } from "./auth-reducer";
+import { getAuthUserData } from "../auth-reducer";
 
-import { INITIALIZED_SUCCESS } from "./constants/initialized_success";
+import { INITIALIZED_SUCCESS } from "./constants";
 
 import { initializedSuccessActionType, InitialStateType } from "./types";
 

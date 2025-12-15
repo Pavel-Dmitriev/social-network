@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 
 import Header from "./Header";
 
-import { logout } from "../../redux/auth-reducer";
+import { logout } from "../../store/auth-reducer";
 
 import { IHeaderContainerProps } from "./interface";
 
