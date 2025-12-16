@@ -1,9 +1,14 @@
 import React from "react";
-import styles from "./users.module.css";
-import avatar from "../../assets/images/avatar.png";
 import { NavLink } from "react-router";
 
-let User = ({ user, followingInProgress, unfollow, follow }) => {
+import styles from "./users.module.css";
+import avatar from "../../assets/images/avatar.png";
+
+import { UserPropsType } from "./interface";
+
+const User: React.FC<UserPropsType> = (props) => {
+  const { user, followingInProgress, unfollow, follow } = props;
+
   return (
     <div>
       <div>

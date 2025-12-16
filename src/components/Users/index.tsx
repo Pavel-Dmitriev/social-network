@@ -1,8 +1,9 @@
 import React from "react";
-import Paginator from "../common/Paginator/Paginator";
+import Paginator from "../common/Paginator";
 import User from "./User";
+import { UsersPropsType } from "./interface";
 
-function Users(props) {
+const Users: React.FC<UsersPropsType> = (props) => {
   const {
     currentPage,
     totalUsersCount,
@@ -33,6 +34,6 @@ function Users(props) {
       </div>
     </div>
   );
-}
+};
 
 export default Users;

@@ -6,7 +6,7 @@ import store from "store/redux-store";
 import App from "./App";
 import RootErrorBoundary from "./components/RootErrorBoundary";
 import ErrorPage from "./components/ErrorPage";
-import { Preloader } from "./components/common/Preloader/Preloader";
+import { Preloader } from "./components/common/Preloader";
 
 const Profile = lazy(() => import("./components/Profile"));
 const DialogsContainer = lazy(

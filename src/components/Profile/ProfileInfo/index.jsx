@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import s from "./ProfileInfo.module.css";
-import { Preloader } from "../../common/Preloader/Preloader";
+import { Preloader } from "../../common/Preloader";
 import ProfileStatusWithHooks from "./ProfileStatusWithHooks";
 import userPhoto from "../../../assets/images/avatar.png";
 import ProfileDataForm from "./ProfileDataForm";
