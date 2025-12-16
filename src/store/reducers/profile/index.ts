@@ -1,4 +1,4 @@
-import { profileAPI, usersAPI } from "../../api";
+import { profileAPI, usersAPI } from "../../../api";
 import { stopSubmit } from "redux-form";
 import {
   AddPostActionCreatorType,

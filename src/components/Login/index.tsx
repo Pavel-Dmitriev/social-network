@@ -2,7 +2,7 @@ import { Navigate } from "react-router";
 import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 
-import { login } from "store/auth-reducer";
+import { login } from "store/reducers/auth";
 
 import { createField, Input } from "../common/FormsControls";
 

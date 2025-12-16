@@ -1,4 +1,4 @@
-import { getAuthUserData } from "../auth-reducer";
+import { getAuthUserData } from "../auth";
 
 import { INITIALIZED_SUCCESS } from "./constants";
 

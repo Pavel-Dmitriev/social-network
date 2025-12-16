@@ -1,6 +1,6 @@
 import { stopSubmit } from "redux-form";
 
-import { authAPI, securityAPI } from "../../api";
+import { authAPI, securityAPI } from "../../../api";
 
 import {
   GET_CAPTCHA_URL_SUCCESS,

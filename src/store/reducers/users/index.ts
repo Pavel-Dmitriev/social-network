@@ -1,5 +1,5 @@
-import { usersAPI } from "../../api";
-import { updateObjectInArray } from "../../utils/object-helpers";
+import { usersAPI } from "../../../api";
+import { updateObjectInArray } from "../../../utils/object-helpers";
 import {
   FOLLOW,
   INITIAL_STATE,

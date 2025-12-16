@@ -1,5 +1,5 @@
 import axios from "axios";
-import { requestUsers } from "../store/users-reducer";
+import { requestUsers } from "../store/reducers/users";
 
 const instance = axios.create({
   baseURL: "https://social-network.samuraijs.com/api/1.0/",

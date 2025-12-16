@@ -5,7 +5,7 @@ import { useLocation, useNavigate, useParams } from "react-router";
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo";
 
-import { getUserProfile, getStatus } from "store/profile-reducer";
+import { getUserProfile, getStatus } from "store/reducers/profile";
 
 const Profile = () => {
   const params = useParams();
