@@ -1,4 +1,4 @@
-import { INITIAL_STATE, SEND_MESSAGE } from "./constants";
+import { SEND_MESSAGE } from "./constants";
 
 export type InitialStateType = {
   dialogsData: DialogType[];

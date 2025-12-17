@@ -1,3 +1,5 @@
+import { Dispatch } from "redux";
+import { ThunkAction } from "redux-thunk";
 import { PhotosType } from "store/types";
 import {
   FOLLOW,
@@ -8,6 +10,7 @@ import {
   TOGGLE_IS_FOLLOWING_PROGRESS,
   UNFOLLOW,
 } from "./constants";
+import { AppStateType } from "store/redux-store";
 
 export type UserType = {
   id: number;
@@ -26,6 +29,18 @@ export type InitialStateType = {
   /** Массив id пользователей */
   followingInProgress: number[];
 };
+
+export type ActionsTypes =
+  | FollowSuccessActionType
+  | UnfollowSuccessActionType
+  | SetUsersActionType
+  | SetCurrentPageActionType
+  | SetTotalUsersCountActionType
+  | ToggleisFetchingActionType
+  | ToggleFollowingProgressActionType;
+
+export type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsTypes>;
+export type DispatchType = Dispatch<ActionsTypes>;
 
 export type FollowSuccessActionType = {
   type: typeof FOLLOW;

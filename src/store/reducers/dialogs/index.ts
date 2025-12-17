@@ -3,7 +3,7 @@ import { InitialStateType, SendMessageActionCreatorMessageType } from "./types";
 
 const dialogsReducer = (
   state: InitialStateType = INITIAL_STATE,
-  action: any
+  action: SendMessageActionCreatorMessageType
 ): InitialStateType => {
   switch (action.type) {
     case SEND_MESSAGE: {

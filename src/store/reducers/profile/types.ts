@@ -6,6 +6,19 @@ import {
   SET_STATUS,
   SET_USER_PROFILE,
 } from "./constants";
+import { ThunkAction } from "redux-thunk";
+import { AppStateType } from "store/redux-store";
+import { FormAction } from "redux-form";
+
+export type ActionsTypes =
+  | AddPostActionCreatorType
+  | SetUserProfileActionType
+  | SetStatusActionType
+  | DeletePostActionType
+  | SavePhotoSuccessActionType
+  | FormAction;
+
+export type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsTypes>;
 
 export type ProfileType = {
   userId: number;

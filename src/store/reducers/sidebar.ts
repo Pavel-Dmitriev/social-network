@@ -20,7 +20,10 @@ let initialState = {
   ],
 };
 
-const sidebarReducer = (state = initialState, action: any) => {
+const sidebarReducer = (
+  state = initialState,
+  action: { type: typeof FRIEND_LIST }
+) => {
   return state;
 };
 
