@@ -123,17 +123,21 @@ export const router = createBrowserRouter([
         //   </div>
         // ),
       },
-      // {
-      //   path: "/users",
-      //   element: withSuspense(UsersContainer),
-      //   loader: usersLoader,
-      //   errorElement: (
-      //     <div>
-      //       <h2>Failed to load users</h2>
-      //       <p>Please check your connection</p>
-      //     </div>
-      //   ),
-      // },
+      {
+        path: "/users",
+        element: (
+          <Suspense fallback={<Preloader />}>
+            <UsersContainer />
+          </Suspense>
+        ),
+        // loader: usersLoader,
+        errorElement: (
+          <div>
+            <h2>Failed to load users</h2>
+            <p>Please check your connection</p>
+          </div>
+        ),
+      },
       // {
       //   path: "/dialogs/:userId?",
       //   element: withSuspense(DialogsContainer),
