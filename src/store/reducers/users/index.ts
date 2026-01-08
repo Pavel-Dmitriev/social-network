@@ -1,10 +1,13 @@
 import { usersAPI } from "api";
-import { updateObjectInArray } from "../../../utils/object-helpers";
-import { DispatchType, InitialStateType, ThunkType, UserType } from "./types";
-import { InferActionsTypes } from "store/types";
+import {
+  ActionsTypes,
+  DispatchType,
+  InitialStateType,
+  ThunkType,
+  UserType,
+} from "./types";
 import { INITIAL_STATE } from "./constants";
-
-export type ActionsTypes = InferActionsTypes<typeof actions>;
+import { updateObjectInArray } from "utils/object-helpers";
 
 export const actions = {
   //подписка на юзера
@@ -107,7 +110,7 @@ const usersReducer = (
 
 //Используем Thunk для получения юзеров из сервера
 export const requestUsers = (page: number, pageSize: number): ThunkType => {
-  return (dispatch) => {
+  return async (dispatch) => {
     dispatch(actions.toggleIsFetching(true));
     dispatch(actions.setCurrentPage(page));
 

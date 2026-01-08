@@ -1,15 +1,10 @@
-import { ThunkAction } from "redux-thunk";
-import { getCaptchaUrl } from ".";
+import { actions } from ".";
 import { GET_CAPTCHA_URL_SUCCESS, SET_USER_DATA } from "./constants";
-import { AppStateType } from "store/redux-store";
 import { FormAction } from "redux-form";
+import { BaseThunkType, InferActionsTypes } from "store/types";
 
-export type ActionsTypes =
-  | SetAuthUserDataActionType
-  | GetCaptchaUrlSuccessActionType
-  | FormAction;
-
-export type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsTypes>;
+export type ActionsTypes = InferActionsTypes<typeof actions>;
+export type ThunkType = BaseThunkType<ActionsTypes | FormAction>;
 
 export type InitialStateType = {
   userId: number | null;

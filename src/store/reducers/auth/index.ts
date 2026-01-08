@@ -33,25 +33,22 @@ const authReducer = (
   }
 };
 
-export const setAuthUserData = (
-  userId: number | null,
-  email: string | null,
-  login: string | null,
-  isAuth: boolean
-): SetAuthUserDataActionType => {
-  return {
-    type: SET_USER_DATA,
-    payload: { userId, email, login, isAuth },
-  };
-};
-
-export const getCaptchaUrlSuccess = (
-  captchaUrl: string
-): GetCaptchaUrlSuccessActionType => {
-  return {
-    type: GET_CAPTCHA_URL_SUCCESS,
-    payload: { captchaUrl },
-  };
+export const actions = {
+  setAuthUserData: (
+    userId: number | null,
+    email: string | null,
+    login: string | null,
+    isAuth: boolean
+  ): SetAuthUserDataActionType =>
+    ({
+      type: SET_USER_DATA,
+      payload: { userId, email, login, isAuth },
+    } as const),
+  getCaptchaUrlSuccess: (captchaUrl: string): GetCaptchaUrlSuccessActionType =>
+    ({
+      type: GET_CAPTCHA_URL_SUCCESS,
+      payload: { captchaUrl },
+    } as const),
 };
 
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
@@ -59,7 +56,7 @@ export const getAuthUserData = (): ThunkType => async (dispatch) => {
 
   if (data?.resultCode === ResultCodesEnum.Success) {
     let { id, email, login } = data.data ?? {};
-    dispatch(setAuthUserData(id, email, login, true));
+    dispatch(actions.setAuthUserData(id, email, login, true));
   }
 };
 
@@ -88,14 +85,14 @@ export const logout = (): ThunkType => async (dispatch) => {
   const data = await authAPI.logout();
   debugger;
   if (data.resultCode === ResultCodesEnum.Success) {
-    dispatch(setAuthUserData(null, null, null, false));
+    dispatch(actions.setAuthUserData(null, null, null, false));
   }
 };
 
 export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
   const data = await securityAPI.getCaptchaUrl();
   const captchaUrl = data.url;
-  dispatch(getCaptchaUrlSuccess(captchaUrl));
+  dispatch(actions.getCaptchaUrlSuccess(captchaUrl));
 };
 
 export default authReducer;

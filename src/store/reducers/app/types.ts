@@ -1,6 +1,10 @@
 import { ThunkAction } from "redux-thunk";
 import { INITIALIZED_SUCCESS } from "./constants";
 import { AppStateType } from "store/redux-store";
+import { InferActionsTypes } from "store/types";
+import { actions } from ".";
+
+export type ActionsType = InferActionsTypes<typeof actions>;
 
 export type initializedSuccessActionType = {
   type: typeof INITIALIZED_SUCCESS;

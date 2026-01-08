@@ -1,9 +1,13 @@
 import { INITIAL_STATE, SEND_MESSAGE } from "./constants";
-import { InitialStateType, SendMessageActionCreatorMessageType } from "./types";
+import {
+  ActionsType,
+  InitialStateType,
+  SendMessageActionCreatorMessageType,
+} from "./types";
 
 const dialogsReducer = (
   state: InitialStateType = INITIAL_STATE,
-  action: SendMessageActionCreatorMessageType
+  action: ActionsType
 ): InitialStateType => {
   switch (action.type) {
     case SEND_MESSAGE: {
@@ -18,14 +22,14 @@ const dialogsReducer = (
   }
 };
 
-//action creators для сообщений
-export const sendMessageActionCreator = (
-  newMessageBody: string
-): SendMessageActionCreatorMessageType => {
-  return {
-    type: SEND_MESSAGE,
-    newMessageBody,
-  };
+export const actions = {
+  sendMessageActionCreator: (
+    newMessageBody: string
+  ): SendMessageActionCreatorMessageType =>
+    ({
+      type: SEND_MESSAGE,
+      newMessageBody,
+    } as const),
 };
 
 export default dialogsReducer;

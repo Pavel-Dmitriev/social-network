@@ -1,4 +1,8 @@
+import { InferActionsTypes } from "store/types";
 import { SEND_MESSAGE } from "./constants";
+import { actions } from ".";
+
+export type ActionsType = InferActionsTypes<typeof actions>;
 
 export type InitialStateType = {
   dialogsData: DialogType[];

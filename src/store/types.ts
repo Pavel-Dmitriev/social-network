@@ -1,10 +1,19 @@
-export type PropertiesTypes<T> = T extends { [key: string]: infer U }
+import { Action } from "redux";
+import { ThunkAction } from "redux-thunk";
+import { AppStateType } from "./redux-store";
+
+export type InferActionsTypes<T> = T extends {
+  [keys: string]: (...args: any[]) => infer U;
+}
   ? U
   : never;
 
-export type InferActionsTypes<
-  T extends { [key: string]: (...args: any[]) => any }
-> = ReturnType<PropertiesTypes<T>>;
+export type BaseThunkType<A extends Action, R = Promise<void>> = ThunkAction<
+  R,
+  AppStateType,
+  unknown,
+  A
+>;
 
 export type PostType = {
   id: number;

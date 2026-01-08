@@ -1,24 +1,22 @@
-import { ContactsType, PhotosType, PostType } from "store/types";
+import {
+  BaseThunkType,
+  ContactsType,
+  InferActionsTypes,
+  PhotosType,
+  PostType,
+} from "store/types";
 import {
   ADD_POST,
-  DELETE_STATUS,
+  DELETE_POST,
   SAVE_PHOTO_SUCCESS,
   SET_STATUS,
   SET_USER_PROFILE,
 } from "./constants";
-import { ThunkAction } from "redux-thunk";
-import { AppStateType } from "store/redux-store";
+import { actions } from ".";
 import { FormAction } from "redux-form";
 
-export type ActionsTypes =
-  | AddPostActionCreatorType
-  | SetUserProfileActionType
-  | SetStatusActionType
-  | DeletePostActionType
-  | SavePhotoSuccessActionType
-  | FormAction;
-
-export type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsTypes>;
+export type ActionsTypes = InferActionsTypes<typeof actions>;
+export type ThunkType = BaseThunkType<ActionsTypes | FormAction>;
 
 export type ProfileType = {
   userId: number;
@@ -52,7 +50,7 @@ export type SetStatusActionType = {
 };
 
 export type DeletePostActionType = {
-  type: typeof DELETE_STATUS;
+  type: typeof DELETE_POST;
   postId: number;
 };
 

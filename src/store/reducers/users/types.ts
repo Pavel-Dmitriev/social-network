@@ -1,8 +1,12 @@
 import { Dispatch } from "redux";
 import { ThunkAction } from "redux-thunk";
-import { PhotosType } from "store/types";
+import { BaseThunkType, InferActionsTypes, PhotosType } from "store/types";
 import { AppStateType } from "store/redux-store";
-import { ActionsTypes } from "../users";
+import { actions } from ".";
+
+export type ActionsTypes = InferActionsTypes<typeof actions>;
+export type ThunkType = BaseThunkType<ActionsTypes>;
+export type DispatchType = Dispatch<ActionsTypes>;
 
 export type UserType = {
   id: number;
@@ -21,6 +25,3 @@ export type InitialStateType = {
   /** Массив id пользователей */
   followingInProgress: number[];
 };
-
-export type ThunkType = ThunkAction<void, AppStateType, unknown, ActionsTypes>;
-export type DispatchType = Dispatch<ActionsTypes>;
