@@ -14,7 +14,7 @@ import {
   SetAuthUserDataActionType,
   ThunkType,
 } from "./types";
-import { ResultCodeForCaptcha, ResultCodesEnum } from "api/enums";
+import { ResultCodeForCaptchaEnum, ResultCodesEnum } from "api/enums";
 
 const authReducer = (
   state: InitialStateType = INITIAL_STATE,
@@ -75,7 +75,7 @@ export const login =
     if (data.resultCode === ResultCodesEnum.Success) {
       dispatch(getAuthUserData());
     } else {
-      if (data.resultCode === ResultCodeForCaptcha.CaptchaIsRequired) {
+      if (data.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired) {
         dispatch(getCaptchaUrl());
       }
       const message =
@@ -86,14 +86,15 @@ export const login =
 
 export const logout = (): ThunkType => async (dispatch) => {
   const data = await authAPI.logout();
+  debugger;
   if (data.resultCode === ResultCodesEnum.Success) {
     dispatch(setAuthUserData(null, null, null, false));
   }
 };
 
 export const getCaptchaUrl = (): ThunkType => async (dispatch) => {
-  const response = await securityAPI.getCaptchaUrl();
-  const captchaUrl = response.data.url;
+  const data = await securityAPI.getCaptchaUrl();
+  const captchaUrl = data.url;
   dispatch(getCaptchaUrlSuccess(captchaUrl));
 };
 

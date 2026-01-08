@@ -3,6 +3,6 @@ export enum ResultCodesEnum {
   Error = 1,
 }
 
-export enum ResultCodeForCaptcha {
+export enum ResultCodeForCaptchaEnum {
   CaptchaIsRequired = 10,
 }
