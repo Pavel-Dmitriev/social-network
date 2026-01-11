@@ -1,10 +1,11 @@
 import { defineConfig } from "vite";
+import { defineConfig as testConfig } from "vitest/config";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import postcssNested from "postcss-nested";
 import path from "path";
 
-export default defineConfig({
+const config = defineConfig({
   plugins: [react(), tailwindcss()],
   server: {
     open: "/",
@@ -31,3 +32,14 @@ export default defineConfig({
     },
   },
 });
+
+const vitestConfig = testConfig({
+  test: {
+    environment: "jsdom",
+  },
+});
+
+export default {
+  ...config,
+  ...vitestConfig,
+};
