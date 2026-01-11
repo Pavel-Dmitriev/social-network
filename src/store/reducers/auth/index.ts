@@ -19,7 +19,7 @@ import { ResultCodeForCaptchaEnum, ResultCodesEnum } from "api/enums";
 const authReducer = (
   state: InitialStateType = INITIAL_STATE,
   action: ActionsTypes
-) => {
+): InitialStateType => {
   switch (action.type) {
     case SET_USER_DATA:
     case GET_CAPTCHA_URL_SUCCESS: {

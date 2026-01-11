@@ -3,9 +3,9 @@ import { NavLink } from "react-router";
 
 import Navbar from "../Navbar";
 
-import { IHeaderProps } from "./interface";
+import { DispatchPropsType, MapPropsType } from "./types";
 
-const Header: React.FC<IHeaderProps> = (props) => {
+const Header: React.FC<MapPropsType & DispatchPropsType> = (props) => {
   return (
     <header
       style={{ gridArea: "h" }}

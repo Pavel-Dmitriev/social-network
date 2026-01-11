@@ -5,17 +5,26 @@ import Header from "./Header";
 
 import { logout } from "../../store/reducers/auth";
 
-import { IHeaderContainerProps } from "./interface";
+import { IHeaderContainerProps, IHeaderProps } from "./interface";
+import { AppStateType } from "store/redux-store";
+import { DispatchPropsType, MapPropsType } from "./types";
 
-class HeaderContainer extends React.Component<IHeaderContainerProps> {
+class HeaderContainer extends React.Component<
+  MapPropsType & DispatchPropsType
+> {
   render() {
     return <Header {...this.props} />;
   }
 }
 
-const mapStateToProps = (state: any) => ({
+const mapStateToProps = (state: AppStateType) => ({
   isAuth: state.auth.isAuth,
   login: state.auth.login,
 });
 
-export default connect(mapStateToProps, { logout })(HeaderContainer);
+export default connect<MapPropsType, DispatchPropsType, {}, AppStateType>(
+  mapStateToProps,
+  {
+    logout,
+  }
+)(HeaderContainer);

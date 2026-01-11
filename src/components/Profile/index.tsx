@@ -6,6 +6,7 @@ import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo";
 
 import { getUserProfile, getStatus } from "store/reducers/profile";
+import { AppStateType } from "store/redux-store";
 
 const Profile = () => {
   const params = useParams();
@@ -13,28 +14,29 @@ const Profile = () => {
   const location = useLocation();
   const dispatch = useDispatch();
 
-  const profile = useSelector((state) => {
+  const profile = useSelector<AppStateType>((state) => {
     return state?.profilePage?.profile;
   });
-  const status = useSelector((state) => state?.profilePage?.status);
-  const authorizedUserId = useSelector((state) => state?.auth?.userId);
-  const isAuth = useSelector((state) => state?.auth?.isAuth);
+  const status = useSelector<AppStateType>(
+    (state) => state?.profilePage?.status
+  );
+  const authorizedUserId = useSelector<AppStateType>(
+    (state) => state?.auth?.userId
+  );
+  const isAuth = useSelector<AppStateType>((state) => state?.auth?.isAuth);
 
   const isOwner = !params.userId;
 
   const refreshProfile = () => {
     let userId = params.userId;
 
-    if (!userId) {
-      userId = authorizedUserId;
-      if (!userId) {
-        navigate("/login");
-        return;
-      }
+    if (!(userId || authorizedUserId)) {
+      navigate("/login");
+      return;
     }
 
-    dispatch(getUserProfile(userId));
-    dispatch(getStatus(userId));
+    dispatch(getUserProfile(Number(userId || authorizedUserId)));
+    dispatch(getStatus(Number(userId || authorizedUserId)));
   };
 
   useEffect(() => {

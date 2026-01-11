@@ -20,12 +20,11 @@ import {
   SET_USER_PROFILE,
 } from "./constants";
 import { PhotosType } from "store/types";
-import { AppStateType } from "store/redux-store";
 
 const profileReducer = (
   state: InitialStateType = INITIAL_STATE,
   action: ActionsTypes
-) => {
+): InitialStateType => {
   switch (action.type) {
     case ADD_POST: {
       let newId =
@@ -64,7 +63,7 @@ const profileReducer = (
     case SAVE_PHOTO_SUCCESS: {
       return {
         ...state,
-        profile: { ...state.profile, photos: action.photos },
+        profile: { ...state.profile, photos: action.photos } as ProfileType,
       };
     }
     default:

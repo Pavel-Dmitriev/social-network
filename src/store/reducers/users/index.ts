@@ -53,7 +53,7 @@ export const actions = {
 const usersReducer = (
   state: InitialStateType = INITIAL_STATE,
   action: ActionsTypes
-) => {
+): InitialStateType => {
   switch (action.type) {
     case "FOLLOW": {
       return {

@@ -19,7 +19,7 @@ export const actions = {
 const appReducer = (
   state: InitialStateType = initialState,
   action: ActionsType
-) => {
+): InitialStateType => {
   switch (action.type) {
     case INITIALIZED_SUCCESS: {
       return {

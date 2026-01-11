@@ -138,17 +138,21 @@ export const router = createBrowserRouter([
           </div>
         ),
       },
-      // {
-      //   path: "/dialogs/:userId?",
-      //   element: withSuspense(DialogsContainer),
-      //   loader: dialogsLoader,
-      //   errorElement: (
-      //     <div>
-      //       <h2>Failed to load messages</h2>
-      //       <p>Please try again</p>
-      //     </div>
-      //   ),
-      // },
+      {
+        path: "/dialogs/:userId?",
+        element: (
+          <Suspense fallback={<Preloader />}>
+            <DialogsContainer />
+          </Suspense>
+        ),
+        // loader: dialogsLoader,
+        errorElement: (
+          <div>
+            <h2>Failed to load messages</h2>
+            <p>Please try again</p>
+          </div>
+        ),
+      },
       {
         path: "/login",
         element: (
