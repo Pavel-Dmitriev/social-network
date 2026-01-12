@@ -8,6 +8,7 @@ import {
 } from "./types";
 import { INITIAL_STATE } from "./constants";
 import { updateObjectInArray } from "utils/object-helpers";
+import { ApiResponseType } from "api/types";
 
 export const actions = {
   //подписка на юзера
@@ -125,20 +126,22 @@ export const requestUsers = (page: number, pageSize: number): ThunkType => {
 export const _followUnfollowFlow = async (
   dispatch: DispatchType,
   userId: number,
-  apiMethod: any,
+  apiMethod: (userId: number) => Promise<ApiResponseType>,
   actionCreator: (userId: number) => ActionsTypes
 ) => {
   dispatch(actions.toggleFollowingProgress(true, userId));
   let response = await apiMethod(userId);
-  if (response.data.resultCode === 0) {
+
+  if (response.resultCode == 0) {
     dispatch(actionCreator(userId));
   }
+
   dispatch(actions.toggleFollowingProgress(false, userId));
 };
 
 export const follow = (userId: number): ThunkType => {
   return async (dispatch) => {
-    _followUnfollowFlow(
+    await _followUnfollowFlow(
       dispatch,
       userId,
       usersAPI.follow.bind(usersAPI),
@@ -149,7 +152,7 @@ export const follow = (userId: number): ThunkType => {
 
 export const unfollow = (userId: number): ThunkType => {
   return async (dispatch) => {
-    _followUnfollowFlow(
+    await _followUnfollowFlow(
       dispatch,
       userId,
       usersAPI.unfollow.bind(usersAPI),

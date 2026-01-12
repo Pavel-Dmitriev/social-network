@@ -9,6 +9,7 @@ describe("Paginator component tests", () => {
   //   const root = component.root
   //   let spans = root.findAllByType("span")
   //   expect(spans.length).toBe(10)
+  test("", () => {});
 });
 
 test("if pages count is more then 10 button NEXT should be present", () => {

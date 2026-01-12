@@ -6,10 +6,12 @@ export const usersAPI = {
   getUsers(currentPage = 1, pageSize = 20) {
     return instance
       .get<GetItemsType>(`users?page=${currentPage}&count=${pageSize}`)
-      .then((response) => response.data);
+      .then((res) => res.data);
   },
   follow(userId: number) {
-    return instance.post<boolean>(`follow/${userId}`).then((res) => res);
+    return instance
+      .post<ApiResponseType>(`follow/${userId}`)
+      .then((res) => res.data);
   },
   unfollow(userId: number) {
     return instance
