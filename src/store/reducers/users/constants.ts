@@ -7,6 +7,7 @@ export const INITIAL_STATE: InitialStateType = {
   currentPage: 1,
   isFetching: true,
   followingInProgress: [],
+  filter: { term: "", friend: null },
   // users: [
   //   {id: '1', followed: false, photoUrl: 'http://archilab.online/images/1/123.jpg' , fullName: 'Igor Petrov', status: 'I am big BOSS', location: {  city: 'Moscow', country: 'Russia'  } },
   //   {id: '2', followed: true, photoUrl: 'http://archilab.online/images/1/123.jpg' , fullName: 'Vasya Vasin', status: 'I am big BOSSSSSS', location: {  city: 'Elec', country: 'Russia'  } },

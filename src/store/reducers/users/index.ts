@@ -2,6 +2,7 @@ import { usersAPI } from "api";
 import {
   ActionsTypes,
   DispatchType,
+  FilterType,
   InitialStateType,
   ThunkType,
   UserType,
@@ -33,6 +34,8 @@ export const actions = {
       type: "SET_CURRENT_PAGE",
       currentPage,
     } as const),
+  setFilter: (filter: FilterType) =>
+    ({ type: "SET_FILTER", payload: filter } as const),
   setTotalUsersCount: (totalUsersCount: number) =>
     ({
       type: "SET_TOTAL_USERS_COUNT",
@@ -90,6 +93,9 @@ const usersReducer = (
         isFetching: action.isFetching,
       };
     }
+    case "SET_FILTER": {
+      return { ...state, filter: action.payload };
+    }
     case "SET_TOTAL_USERS_COUNT": {
       return {
         ...state,
@@ -110,16 +116,23 @@ const usersReducer = (
 };
 
 //Используем Thunk для получения юзеров из сервера
-export const requestUsers = (page: number, pageSize: number): ThunkType => {
+export const requestUsers = (
+  page: number,
+  pageSize: number,
+  filter: FilterType
+): ThunkType => {
   return async (dispatch) => {
     dispatch(actions.toggleIsFetching(true));
     dispatch(actions.setCurrentPage(page));
+    dispatch(actions.setFilter(filter));
 
-    usersAPI.getUsers(page, pageSize).then((data) => {
-      dispatch(actions.toggleIsFetching(false));
-      dispatch(actions.setUsers(data.items));
-      // dispatch(setTotalUsersCount(data.totalCount))
-    });
+    usersAPI
+      .getUsers(page, pageSize, filter.term, filter.friend)
+      .then((data) => {
+        dispatch(actions.toggleIsFetching(false));
+        dispatch(actions.setUsers(data.items));
+        // dispatch(setTotalUsersCount(data.totalCount))
+      });
   };
 };
 

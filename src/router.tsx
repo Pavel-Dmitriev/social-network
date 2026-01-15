@@ -12,7 +12,7 @@ const Profile = lazy(() => import("./components/Profile"));
 const DialogsContainer = lazy(
   () => import("./components/Dialogs/DialogsContainer")
 );
-const UsersContainer = lazy(() => import("./components/Users/UsersContainer"));
+const Users = lazy(() => import("./components/Users"));
 const Login = lazy(() => import("./components/Login"));
 
 // Data loaders for different routes
@@ -127,7 +127,7 @@ export const router = createBrowserRouter([
         path: "/users",
         element: (
           <Suspense fallback={<Preloader />}>
-            <UsersContainer />
+            <Users />
           </Suspense>
         ),
         // loader: usersLoader,

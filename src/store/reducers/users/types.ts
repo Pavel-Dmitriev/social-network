@@ -3,6 +3,7 @@ import { ThunkAction } from "redux-thunk";
 import { BaseThunkType, InferActionsTypes, PhotosType } from "store/types";
 import { AppStateType } from "store/redux-store";
 import { actions } from ".";
+import { INITIAL_STATE } from "./constants";
 
 export type ActionsTypes = InferActionsTypes<typeof actions>;
 export type ThunkType = BaseThunkType<ActionsTypes>;
@@ -24,4 +25,10 @@ export type InitialStateType = {
   isFetching: boolean;
   /** Массив id пользователей */
   followingInProgress: number[];
+  filter: {
+    term: string;
+    friend: null | boolean;
+  };
 };
+
+export type FilterType = typeof INITIAL_STATE.filter;
