@@ -1,10 +1,15 @@
-import { Field, Form, Formik, FormikHelpers, FormikValues } from "formik";
-import { DEFAULT_VALUES } from "./constants/default_values";
+import { Field, Form, Formik } from "formik";
+
 import { FilterType } from "store/reducers/users/types";
+
+import useDefaultValues from "./useDefaultValues";
+
 import { ISearchUsers } from "./interface";
 import { FormType } from "./types";
 
 const SearchUsers: React.FC<ISearchUsers> = ({ onFilterChanged }) => {
+  const defaultValues = useDefaultValues();
+
   const onSubmit = (
     values: FormType,
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
@@ -27,7 +32,11 @@ const SearchUsers: React.FC<ISearchUsers> = ({ onFilterChanged }) => {
   };
 
   return (
-    <Formik initialValues={DEFAULT_VALUES} onSubmit={onSubmit}>
+    <Formik
+      enableReinitialize
+      initialValues={defaultValues}
+      onSubmit={onSubmit}
+    >
       {({ isSubmitting }) => (
         <Form>
           <Field type="text" name="term" />

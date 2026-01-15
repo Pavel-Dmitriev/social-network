@@ -1,7 +1,6 @@
 import { InjectedFormProps } from "redux-form";
 
 export type MapStatePropsType = {
-  captchaUrl: string | null;
   isAuth: boolean;
 };
 
