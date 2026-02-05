@@ -15,7 +15,6 @@ const SearchUsers: React.FC<ISearchUsers> = ({ onFilterChanged }) => {
     { setSubmitting }: { setSubmitting: (isSubmitting: boolean) => void }
   ) => {
     let friend: FilterType["friend"];
-    debugger;
     if (values.friend === "null") {
       friend = null;
     } else if (values.friend === "true") {

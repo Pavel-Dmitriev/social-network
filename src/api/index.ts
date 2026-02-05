@@ -4,6 +4,7 @@ import { authAPI } from "./auth-api";
 import { profileAPI } from "./profile-api";
 import { usersAPI } from "./users-api";
 import { securityAPI } from "./security-api";
+import { chatAPI } from "./chat-api";
 
 import { requestUsers } from "../store/reducers/users";
 
@@ -15,4 +16,4 @@ export const instance = axios.create({
   withCredentials: true,
 });
 
-export { authAPI, profileAPI, usersAPI, securityAPI };
+export { authAPI, profileAPI, usersAPI, securityAPI, chatAPI };

@@ -14,6 +14,7 @@ const DialogsContainer = lazy(
 );
 const Users = lazy(() => import("./components/Users"));
 const Login = lazy(() => import("./components/Login"));
+const Chat = lazy(() => import("./components/pages/Chat"));
 
 // Data loaders for different routes
 const profileLoader = async ({ params, request }) => {
@@ -82,7 +83,6 @@ const dialogsLoader = async ({ params }) => {
 const authLoader = async () => {
   // Check authentication status
   const response = await fetch("/api/auth/me");
-  console.log("🚀 ~ response:", response);
 
   if (response.ok) {
     const userData = await response.json();
@@ -167,6 +167,14 @@ export const router = createBrowserRouter([
         //     <p>Authentication service unavailable</p>
         //   </div>
         // ),
+      },
+      {
+        path: "/chat",
+        element: (
+          <Suspense fallback={<Preloader />}>
+            <Chat />
+          </Suspense>
+        ),
       },
       // {
       //   path: "/news",

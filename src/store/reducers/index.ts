@@ -4,3 +4,4 @@ export { default as profile } from "./profile";
 export { default as users } from "./users";
 export { default as dialogs } from "./dialogs";
 export { default as sidebar } from "./sidebar";
+export { default as chat } from "./chat";

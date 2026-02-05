@@ -83,7 +83,6 @@ export const login =
 
 export const logout = (): ThunkType => async (dispatch) => {
   const data = await authAPI.logout();
-  debugger;
   if (data.resultCode === ResultCodesEnum.Success) {
     dispatch(actions.setAuthUserData(null, null, null, false));
   }

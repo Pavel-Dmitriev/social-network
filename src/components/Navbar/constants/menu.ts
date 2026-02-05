@@ -17,6 +17,11 @@ export const MENU: IMenuItem[] = [
     title: "Сообщения",
   },
   {
+    key: "chat",
+    path: "/chat",
+    title: "Чат",
+  },
+  {
     key: "news",
     path: "/news",
     title: "Новости",

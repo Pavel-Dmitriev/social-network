@@ -31,3 +31,18 @@ export type SavePhotoResponseDataType = {
 export type GetCaptchaUrl = {
   url: string;
 };
+
+export type SubscriberType = (messages: ChatMessageAPIType[]) => void;
+
+export type MessagesReceivedSubscriberType = (
+  messages: ChatMessageAPIType[],
+) => void;
+export type StatusChangedSubscriberType = (status: StatusType) => void;
+
+export type ChatMessageAPIType = {
+  message: string;
+  photo: string;
+  userId: number;
+  userName: string;
+};
+export type StatusType = "pending" | "ready" | "error";
