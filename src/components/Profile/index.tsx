@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useLocation, useNavigate, useParams } from "react-router";
 
@@ -18,12 +18,14 @@ const Profile = () => {
     return state?.profilePage?.profile;
   });
   const status = useSelector<AppStateType>(
-    (state) => state?.profilePage?.status
+    (state) => state?.profilePage?.status,
   );
   const authorizedUserId = useSelector<AppStateType>(
-    (state) => state?.auth?.userId
+    (state) => state?.auth?.userId,
   );
-  const isAuth = useSelector<AppStateType>((state) => state?.auth?.isAuth);
+  const isAuth = useSelector<AppStateType>((state) => {
+    return state?.auth?.isAuth;
+  });
 
   const isOwner = !params.userId;
 

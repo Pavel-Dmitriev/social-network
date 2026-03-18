@@ -8,9 +8,9 @@ import LoginForm from "./LoginForm";
 
 import { FormDataType, MapDispatchPropsType, MapStatePropsType } from "./types";
 
-const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
+const Login = () => {
   const captchaUrl = useSelector(
-    (state: AppStateType) => state.auth.captchaUrl
+    (state: AppStateType) => state.auth.captchaUrl,
   );
   console.log(captchaUrl);
 
@@ -24,8 +24,8 @@ const Login: React.FC<MapStatePropsType & MapDispatchPropsType> = (props) => {
         formData.email,
         formData.password,
         formData.rememberMe,
-        formData.captcha
-      )
+        formData.captcha,
+      ),
     );
   };
 

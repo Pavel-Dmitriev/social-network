@@ -10,7 +10,7 @@ import { Preloader } from "./components/common/Preloader";
 
 const Profile = lazy(() => import("./components/Profile"));
 const DialogsContainer = lazy(
-  () => import("./components/Dialogs/DialogsContainer")
+  () => import("./components/Dialogs/DialogsContainer"),
 );
 const Users = lazy(() => import("./components/Users"));
 const Login = lazy(() => import("./components/Login"));
@@ -101,11 +101,7 @@ export const router = createBrowserRouter([
   },
   {
     path: "/",
-    element: (
-      <Provider store={store}>
-        <App />
-      </Provider>
-    ),
+    element: <App />,
     errorElement: <RootErrorBoundary />,
     children: [
       {
