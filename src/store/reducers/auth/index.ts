@@ -18,7 +18,7 @@ import { ResultCodeForCaptchaEnum, ResultCodesEnum } from "api/enums";
 
 const authReducer = (
   state: InitialStateType = INITIAL_STATE,
-  action: ActionsTypes
+  action: ActionsTypes,
 ): InitialStateType => {
   switch (action.type) {
     case SET_USER_DATA:
@@ -38,17 +38,17 @@ export const actions = {
     userId: number | null,
     email: string | null,
     login: string | null,
-    isAuth: boolean
+    isAuth: boolean,
   ): SetAuthUserDataActionType =>
     ({
       type: SET_USER_DATA,
       payload: { userId, email, login, isAuth },
-    } as const),
+    }) as const,
   getCaptchaUrlSuccess: (captchaUrl: string): GetCaptchaUrlSuccessActionType =>
     ({
       type: GET_CAPTCHA_URL_SUCCESS,
       payload: { captchaUrl },
-    } as const),
+    }) as const,
 };
 
 export const getAuthUserData = (): ThunkType => async (dispatch) => {
@@ -56,7 +56,9 @@ export const getAuthUserData = (): ThunkType => async (dispatch) => {
 
   if (data?.resultCode === ResultCodesEnum.Success) {
     let { id, email, login } = data.data ?? {};
-    dispatch(actions.setAuthUserData(id, email, login, true));
+    const token = localStorage.getItem("auth-token");
+
+    dispatch(actions.setAuthUserData(id, email, login, !!token));
   }
 };
 
@@ -65,11 +67,13 @@ export const login =
     email: string,
     password: string,
     rememberMe: boolean,
-    captcha: string
+    captcha: string,
   ): ThunkType =>
   async (dispatch) => {
     const data = await authAPI.login(email, password, rememberMe, captcha);
+
     if (data.resultCode === ResultCodesEnum.Success) {
+      localStorage.setItem("auth-token", data?.data?.token);
       dispatch(getAuthUserData());
     } else {
       if (data.resultCode === ResultCodeForCaptchaEnum.CaptchaIsRequired) {

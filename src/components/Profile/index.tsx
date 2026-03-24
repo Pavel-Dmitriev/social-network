@@ -1,18 +1,21 @@
-import { useEffect } from "react";
+import { useCallback, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { useLocation, useNavigate, useParams } from "react-router";
+import { Navigate, useParams } from "react-router";
 
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo";
 
 import { getUserProfile, getStatus } from "store/reducers/profile";
 import { AppStateType } from "store/redux-store";
+import { ThunkDispatch } from "redux-thunk";
+import { ActionsTypes } from "store/reducers/profile/types";
+import { getAuthUserData, logout } from "store/reducers/auth";
 
 const Profile = () => {
   const params = useParams();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const dispatch = useDispatch();
+  const dispatch =
+    useDispatch<ThunkDispatch<AppStateType, unknown, ActionsTypes>>();
+  const token = localStorage.getItem("auth-token");
 
   const profile = useSelector<AppStateType>((state) => {
     return state?.profilePage?.profile;
@@ -29,21 +32,23 @@ const Profile = () => {
 
   const isOwner = !params.userId;
 
-  const refreshProfile = () => {
+  const handleRefreshProfile = useCallback(() => {
     let userId = params.userId;
-
-    if (!(userId || authorizedUserId)) {
-      navigate("/login");
-      return;
-    }
 
     dispatch(getUserProfile(Number(userId || authorizedUserId)));
     dispatch(getStatus(Number(userId || authorizedUserId)));
-  };
+  }, [params.userId, authorizedUserId]);
 
   useEffect(() => {
-    refreshProfile();
-  }, [params.userId, authorizedUserId]);
+    dispatch(getAuthUserData());
+  }, []);
+
+  useEffect(() => {
+    handleRefreshProfile();
+  }, []);
+
+  //TODO: нужны фетчинги
+  if (!isAuth) return <Navigate to="/login" />;
 
   return (
     <div>

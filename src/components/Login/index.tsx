@@ -1,22 +1,25 @@
 import { Navigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 
-import { login } from "store/reducers/auth";
+import { getAuthUserData, login } from "store/reducers/auth";
 
 import { AppStateType } from "store/redux-store";
 import LoginForm from "./LoginForm";
 
-import { FormDataType, MapDispatchPropsType, MapStatePropsType } from "./types";
+import { FormDataType } from "./types";
+import { ActionsTypes } from "store/reducers/auth/types";
+import { ThunkDispatch } from "redux-thunk";
+import { useEffect } from "react";
 
 const Login = () => {
   const captchaUrl = useSelector(
     (state: AppStateType) => state.auth.captchaUrl,
   );
-  console.log(captchaUrl);
 
   const isAuth = useSelector((state: AppStateType) => state.auth.isAuth);
 
-  const dispatch = useDispatch();
+  const dispatch =
+    useDispatch<ThunkDispatch<AppStateType, unknown, ActionsTypes>>();
 
   const onSubmit = (formData: FormDataType) => {
     dispatch(
@@ -28,6 +31,14 @@ const Login = () => {
       ),
     );
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("auth-token");
+
+    if (token) {
+      dispatch(getAuthUserData());
+    }
+  }, []);
 
   if (isAuth) {
     return <Navigate to={"/profile"} />;
